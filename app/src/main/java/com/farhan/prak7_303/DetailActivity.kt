@@ -16,7 +16,11 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarDetail)
         supportActionBar?.title = "Book Detail"
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val book = intent.getSerializableExtra("book") as Book
 
         Glide.with(this)
@@ -28,5 +32,10 @@ class DetailActivity : AppCompatActivity() {
         binding.tvDate.text = book.releaseDate
         binding.tvDesc.text = book.description
         binding.tvPages.text = "Pages: ${book.pages}"
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        // Ketika tombol kembali di Toolbar ditekan, tutup Activity ini
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }
